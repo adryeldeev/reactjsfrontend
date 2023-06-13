@@ -6,7 +6,7 @@ function Home() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8081/')
+    axios.get('https://backendpsql-ehca0ie8m-adryeldeev.vercel.app/')
       .then(res => {
         console.log(res.data);
         setUsers(res.data);
@@ -15,7 +15,7 @@ function Home() {
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:8081/delete/${id}`)
+    axios.delete(`https://backendpsql-ehca0ie8m-adryeldeev.vercel.app/delete/${id}`)
       .then(res => {
         console.log(res);
         setUsers(users.filter(user => user.id !== id));

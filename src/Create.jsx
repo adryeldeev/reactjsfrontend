@@ -10,7 +10,7 @@ function Create(){
     const navigate = useNavigate()
     const handleSubmit = (e)=>{
         e.preventDefault()
-        axios.post('http://localhost:8081/client', values)
+        axios.post('https://backendpsql-ehca0ie8m-adryeldeev.vercel.app/client', values)
         .then(res=>
             {console.log(res)
             navigate('/')
