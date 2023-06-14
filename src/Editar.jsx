@@ -2,38 +2,40 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-function Create() {
+function Editar() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [values, setValues] = useState({
+  const [user, setUser] = useState({
     name: "",
     email: "",
-    numero: "",
+    numero: ""
   });
-  const [users, setUsers] = useState([]);
+
   useEffect(() => {
     axios.get(`https://backendpsql-ehca0ie8m-adryeldeev.vercel.app/user/${id}`)
       .then((res) => {
-        console.log(res);
-        setUsers({
-          ...values,
-          name: data[0].name,
-          email: data[0].email,
-          numero: data[0].numero
-        });
+        setUser(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put("https://backendpsql-ehca0ie8m-adryeldeev.vercel.app/update/" + id, values)
+      .put(`https://backendpsql-ehca0ie8m-adryeldeev.vercel.app/update/${id}`, user)
       .then((res) => {
         console.log(res);
         navigate("/");
       })
       .catch((err) => console.log(err));
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prevState) => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
   return (
@@ -42,42 +44,42 @@ function Create() {
         <form onSubmit={handleSubmit}>
           <h2>Editar Cliente</h2>
           <div className="mb-2">
-            <label htmlFor="">Nome</label>
+            <label htmlFor="name">Nome</label>
             <input
               type="text"
+              id="name"
+              name="name"
               placeholder="Nome"
               className="form-control"
               required
-              value={users.name}
-              onChange={(e) =>
-                setValues({ ...values, name: e.target.value })
-              }
+              value={user.name}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-2">
-            <label htmlFor="">Email</label>
+            <label htmlFor="email">Email</label>
             <input
               type="email"
+              id="email"
+              name="email"
               placeholder="Email"
               className="form-control"
               required
-              value={users.email}
-              onChange={(e) =>
-                setValues({ ...values, email: e.target.value })
-              }
+              value={user.email}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-2">
-            <label htmlFor="">Numero</label>
+            <label htmlFor="numero">Numero</label>
             <input
               type="text"
+              id="numero"
+              name="numero"
               placeholder="Numero"
               className="form-control"
               required
-              value={users.numero}
-              onChange={(e) =>
-                setValues({ ...values, numero: e.target.value })
-              }
+              value={user.numero}
+              onChange={handleChange}
             />
           </div>
           <button className="btn btn-success">Editar</button>
@@ -87,4 +89,4 @@ function Create() {
   );
 }
 
-export default Create;
+export default Editar;
