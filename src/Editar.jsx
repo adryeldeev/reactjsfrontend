@@ -12,7 +12,7 @@ function Editar() {
   });
 
   useEffect(() => {
-    axios.get(`https://backendpsql-ehca0ie8m-adryeldeev.vercel.app/user/${id}`)
+    axios.get(`https://backendpsql-kskylzz9s-adryeldeev.vercel.app/user/${id}`)
       .then((res) => {
         setUser(res.data);
       })
@@ -22,7 +22,7 @@ function Editar() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`https://backendpsql-ehca0ie8m-adryeldeev.vercel.app/update/${id}`, user)
+      .put(`https://backendpsql-kskylzz9s-adryeldeev.vercel.app/update/${id}`, user)
       .then((res) => {
         console.log(res);
         navigate("/");
@@ -84,6 +84,7 @@ function Editar() {
           </div>
           <button className="btn btn-success">Editar</button>
         </form>
+       
       </div>
     </div>
   );

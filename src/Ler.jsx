@@ -6,7 +6,7 @@ function Ler() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        axios.get('https://backendpsql-ehca0ie8m-adryeldeev.vercel.app/user/' + id)
+        axios.get('https://backendpsql-kskylzz9s-adryeldeev.vercel.app/user/' + id)
             .then(res => {
                 console.log(res.data);
                 setUsers(res.data);
