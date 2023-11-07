@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Home() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get('https://backendpsql-kskylzz9s-adryeldeev.vercel.app/')
-      .then(res => {
-        console.log(res.data);
+    axios
+      .get("https://backendpsql-kskylzz9s-adryeldeev.vercel.app/")
+      .then((res) => {
         setUsers(res.data);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete(`https://backendpsql-kskylzz9s-adryeldeev.vercel.app/delete/${id}`)
-      .then(res => {
-        console.log(res);
-        setUsers(users.filter(user => user.id !== id));
+    axios
+      .delete(
+        `https://backendpsql-kskylzz9s-adryeldeev.vercel.app/delete/${id}`
+      )
+      .then((res) => {
+        setUsers(users.filter((user) => user.id !== id));
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -28,7 +30,9 @@ function Home() {
       <div className="w-50 bg-white rounded p-3">
         <h2>Lista de Clientes</h2>
         <div className="d-flex justify-content-end">
-          <Link to='/create' className="btn btn-success">Adicionar +</Link>
+          <Link to="/create" className="btn btn-success">
+            Adicionar +
+          </Link>
         </div>
         <table className="table">
           <thead>
@@ -48,9 +52,21 @@ function Home() {
                 <td>{user.email}</td>
                 <td>{user.numero}</td>
                 <td>
-                  <Link to={`/Ler/${user.id}`} className="btn btn-sm btn-info">Ler</Link>
-                  <Link to={`/Editar/${user.id}`} className="btn btn-sm btn-primary mx-1">Editar</Link>
-                  <button className="btn btn-sm btn-danger" onClick={() => handleDelete(user.id)}>Deletar</button>
+                  <Link to={`/Ler/${user.id}`} className="btn btn-sm btn-info">
+                    Ler
+                  </Link>
+                  <Link
+                    to={`/Editar/${user.id}`}
+                    className="btn btn-sm btn-primary mx-1"
+                  >
+                    Editar
+                  </Link>
+                  <button
+                    className="btn btn-sm btn-danger"
+                    onClick={() => handleDelete(user.id)}
+                  >
+                    Deletar
+                  </button>
                 </td>
               </tr>
             ))}
